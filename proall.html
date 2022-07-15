@@ -1,0 +1,21 @@
+<html>
+    <body>
+        <table border="2px">
+            <tr>
+                <th>Product Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>View</th>
+            </tr>
+            {% for i in l %}
+            <tr>
+                <td>{{ i.pname }}</td>
+                <td>{{ i.des }}</td>
+                <td>{{ i.price }}</td>
+                <td><a href="{% url 'proview' i.id %}">view</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        
+    </body>
+</html>

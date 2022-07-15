@@ -1,0 +1,96 @@
+{% load static %}
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Login</title>
+        <meta name="description" content="Login - Register Template">
+        <meta name="author" content="Lorenzo Angelino aka MrLolok">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'css/login.css' %}">
+        <script>
+            function formValidation() {
+                const firstname = document.getElementById("username");
+                const password = document.getElementById("password");
+
+                if (firstname.value.length < 2 || firstname.value.length > 20) {
+                    alert("Username length should be more than 2 and less than 21");
+                    firstname.focus();
+                    return false;
+                }
+                if (!password.value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/)) {
+                    alert("Password should contain 8 characters having a number, lower and upper case and special character.");
+                }
+                return true;
+            }
+        </script>
+    </head>
+
+    <body>
+        <nav class="navbar">
+            <div class="logo">VATSAL</div>
+            <ul class="nav-links">
+                <div class="menu">
+                    <li><a href="{% url 'signup' %}">Signup</a></li>
+                    <li class="services">
+                        <a href="/">Dropdown</a>
+                        <ul class="dropdown">
+                            <li><a href="/">Dropdown 1 </a></li>
+                            <li><a href="/">Dropdown 2</a></li>
+                            <li><a href="/">Dropdown 2</a></li>
+                            <li><a href="/">Dropdown 3</a></li>
+                            <li><a href="/">Dropdown 4</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/">About</a></li>
+                    <li><a href="/">Contact</a></li>
+                </div>
+            </ul>
+            
+        </nav>
+        <div id="container-login">
+            <div id="title">
+                <i class="material-icons lock">lock</i>Vendor Login
+            </div>
+            <form name="loginform" class="login" onsubmit="return formValidation()" method="POST">
+                {% csrf_token %}
+                <div class="input">
+                    <div class="input-addon">
+                        <i class="material-icons">face</i>
+                    </div>
+                    <input id="username" placeholder="enter email" name="username" type="text" required class="validate"
+                        autocomplete="off">
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="input">
+                    <div class="input-addon">
+                        <i class="material-icons">vpn_key</i>
+                    </div>
+                    <input id="password" placeholder="Password" name="password" type="password" required class="validate"
+                        autocomplete="off">
+                </div>
+
+                <div class="remember-me">
+                    <input type="checkbox">
+                    <span style="color: #DDD">Remember Me</span>
+                </div>
+
+                <input type="submit" value="Log In" />
+            </form>
+
+            <div class="forgot-password">
+                <a href="#">Forgot your password?</a>
+            </div>
+            <div class="privacy">
+                <a href="#">Privacy Policy</a>
+            </div>
+
+            <div class="register">
+                Don't have an account yet?
+                <a href="{% url 'signup' %}"><button id="register-link">signup here</button></a>
+            </div>
+        </div>
+    </body>

@@ -1,0 +1,90 @@
+
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'css/home.css' %}">
+        <style>
+            .card {
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+                max-width: 300px;
+                margin: auto;
+                text-align: center;
+                font-family: arial;
+              }
+              
+              .price {
+                color: grey;
+                font-size: 22px;
+              }
+              
+              .card button {
+                border: none;
+                outline: 0;
+                padding: 12px;
+                color: white;
+                background-color: #000;
+                text-align: center;
+                cursor: pointer;
+                width: 100%;
+                font-size: 18px;
+              }
+              
+              .card button:hover {
+                opacity: 0.7;
+              }
+        </style>
+        <title>myweb</title>
+    </head>
+    <body>
+        <nav class="navbar">
+            <div class="logo"> VATSAL</div>
+            
+            <ul class="nav-links">
+                <div class="menu">
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    
+                    <li><a href="{% url 'productadd' %}">Add</a></li>
+                    
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    
+                    <li><a href="/">About</a></li>
+                    <li><a href="/">Contact</a></li>
+                </div>
+            </ul>
+        </nav>
+        
+        <table class="table table-striped table-hover">
+            <tr>
+                <th>Product Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Image</th>
+                <th>Review</th>
+            </tr>
+            
+            <tr>
+                <td>{{ v.pname }}</td>
+                <td>{{ v.des }}</td>
+                <td>{{ v.price }}</td>
+                <td>><img src="{{ v.img.url }}" style="height: 100px; width: 100px"></td>
+                <td>{{ v.review }}</td>
+            </tr>
+ 
+          </table>
+
+          <h2 style="text-align:center">Product Card</h2>
+
+          <div class="card">
+            <img src="{{ v.img.url }}" style="width:100%">
+            <h1>{{ v.pname }}</h1>
+            <p class="price">{{ v.price }}</p>
+            <p>{{ v.des }}</p>
+            <p><button><a href="{% url 'prodel' v.id %}">Delete</button></p>
+          </div>
+          
+        </body>
+</html>

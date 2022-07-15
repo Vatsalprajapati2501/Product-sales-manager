@@ -1,0 +1,111 @@
+{% load static %}
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Sign Up </title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/signupnew.css' %}">
+        
+        <script>
+            function formValidation() {
+                const fname = document.getElementById("fname");
+                const lname = document.getElementById("lname");
+                const email = document.getElementById("email");
+                const upassword = document.getElementById("password");
+                const cpassword = document.getElementById("cpassword");
+            
+                if (fname.value.length < 2 || fname.value.length > 20) {
+                    alert("Name length should be more than 2 and less than 21");
+                    fname.focus();
+                    return false;
+                }
+                if (lname.value.length < 2 || lname.value.length > 20) {
+                    alert("Name length should be more than 2 and less than 21");
+                    lname.focus();
+                    return false;
+                }
+                if (!email.value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+                    alert("Please enter a valid email!");
+                    email.focus();
+                    return false;
+                }
+                if (!password.value.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/) || password.value.length < 8) {
+                    alert("Password should contain 8 characters having a number, lower and upper case and special character.");
+                    password.focus();
+                    return false;
+                }
+            
+                if (password.value != cpassword.value) {
+                    alert("Passwords do not match");
+                    cpassword.focus();
+                    return false;
+                }
+                return true;
+            }
+        </script>
+    </head>
+
+    <body>
+        <nav class="navbar">
+            <div class="logo">VATSAL</div>
+            
+            <ul class="nav-links">
+                <div class="menu">
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li class="services">
+                        <a href="/">Dropdown</a>
+                        <ul class="dropdown">
+                            <li><a href="/">Dropdown 1 </a></li>
+                            <li><a href="/">Dropdown 2</a></li>
+                            <li><a href="/">Dropdown 2</a></li>
+                            <li><a href="/">Dropdown 3</a></li>
+                            <li><a href="/">Dropdown 4</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/">About</a></li>
+                    <li><a href="/">Contact</a></li>
+                </div>
+            </ul>
+        </nav>
+
+        <div class="container">
+            <h1 class="label">Vendor Signup</h1>
+            <p>Please fill in this form to create an account.</p>
+            <hr>
+            <form name="signupform" class="sign_up" onsubmit="return formValidation()" method="POST">
+                {% csrf_token %}
+                <label for="fname">First Name</label>
+                <input type="text" placeholder="Enter first name " name="fname" id="fname" required>
+
+                <label for="lname">Last Name</label>
+                <input type="text" placeholder="Enter last name " name="lname" id="lname" required>
+
+                <label for="phone">Mobile No.</label>
+                <input type="tel" placeholder="Enter mobile number " name="phone" id="phone" required>
+
+                <label for="email">Email</label>
+                <input type="text" placeholder="Enter email id " name="email" id="email" required>
+
+                <label for="password">Password</label>
+                <input type="password" placeholder="Enter password " name="password" id="password" required>
+
+                <label for="cpassword">Confirm Password</label>
+                <input type="password" placeholder="Enter password again" name="cpassword" id="cpassword" required>
+
+                <div class="clearfix">
+                    <button type="submit" class="signupbtn"><b>Sign Up<b></button>
+                </div>
+              
+                <div class="register">
+                    <h6>Already have an account?<h6>
+                            <a href="{% url 'login' %}" text-align="center">Go to Login Page</a>
+                </div>
+            </form>
+        </div>
+        <footer>
+            
+        </footer>
+    </body>
+</html>

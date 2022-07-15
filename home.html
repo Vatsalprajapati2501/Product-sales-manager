@@ -1,0 +1,65 @@
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'css/home.css' %}">
+        <title>myweb</title>
+    </head>
+    <body>
+        <nav class="navbar">                
+            <div class="logo">VATSAL</div>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" name="search" placeholder="Search Products" aria-label="Search">
+              
+          </form>
+            <ul class="nav-links">
+                <div class="menu">
+                    <li><a href="{% url 'productadd' %}">Add</a></li>
+                    <li><a href="{% url 'proall' %}">All Products</a></li>
+                    
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    
+                    <li><a href="/">About</a></li>
+                    <li><a href="/">Contact</a></li>
+                </div>
+            </ul>
+        </nav>
+        <h3 class="my">Welcome To Homepage</h3>
+        
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Product name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>View</th>
+                </tr>
+            </thead> 
+            {% for i in p %}
+            <tbody>
+              <tr>
+                <td>{{ i.pname }}</td>
+                <td>{{ i.des }}</td>
+                <td>{{ i.price }}</td>
+                <td><a href="{% url 'proview' i.id %}">view</a></td>
+                
+              </tr>
+            
+            {% endfor %}
+            {% for i in l %}
+            <tr>
+                <td>{{ i.pname }}</td>
+                <td>{{ i.price }}</td>
+                <td><img src="{{ i.img.url }}" style="height: 100px; width: 100px"></td>
+                <td><a href="{% url 'proview' i.id %}">view</a></td>
+                <td><a href="{% url 'prodel' i.id %}">delete</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+          </table>
+           
+        </body>
+</html>
